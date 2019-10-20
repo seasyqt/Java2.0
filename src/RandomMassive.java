@@ -8,30 +8,46 @@ public class RandomMassive {
             randomMassive[numberElementsMassive] = (int)Math.round(-10+ (Math.random() * 20)); // пристоение элементу массива случайное число
             System.out.print(randomMassive[numberElementsMassive] + " "); //вывод всех рандомных чисел
         }
-        int max = randomMassive[0] , min = randomMassive[0]; // объявление макс и мин
-int numberMax = 0,numberMin = 0;
+int numberElementMinPositive = 0,numberElementMaxNegative = 0;
+        int temp ;
 
         for(int numberElementsMassive = 0;numberElementsMassive < randomMassive.length;numberElementsMassive++)
         {
-            if(randomMassive[numberElementsMassive] > max  ) // сравнение всех чисел в массиве как самое макс
+            if (randomMassive[numberElementsMassive] >= 0) //вычисляем мин. положительный
             {
-                max = randomMassive[numberElementsMassive]; // и присваивает в переменную это число
-                numberMax = numberElementsMassive;
+
+                if (randomMassive[numberElementsMassive] < randomMassive[numberElementMinPositive]) //текущее число массива меньше ,чем мин.положительнео
+                {
+                    numberElementMinPositive = numberElementsMassive; //текущее число массива , становиться мин.полож.
+                }
+                else if (randomMassive[numberElementMinPositive] < 0) // если мин.полож. - отрицательное
+                {
+                    numberElementMinPositive = numberElementsMassive; //то мин.полож. - текущий элемент массива
+                }
+
             }
-            if (randomMassive[numberElementsMassive] < min) //тоже самое ,что и выше только с мин.числом
+            else if (randomMassive[numberElementsMassive] < 0) //вычисляем макс. отрицательное число
             {
-                min = randomMassive[numberElementsMassive];
-                numberMin = numberElementsMassive;
+                if (randomMassive[numberElementsMassive] > randomMassive[numberElementMaxNegative]) //если элем.массива больше чем макс.отрицательное
+                {
+                    numberElementMaxNegative = numberElementsMassive;// то номер макс.отрицательного числа - текущий
+                }
+                else if (randomMassive[numberElementMaxNegative] >= 0) // если макс.отрицательный  - положительный
+                {
+                    numberElementMaxNegative = numberElementsMassive; //то макс.отрицательное - текущий элемент массива
+                }
             }
+
         }
-        System.out.println("\nМаксимальное число " + max); //вывод макс числа
-        System.out.println("Минимальное число " + min);  //вывод мин числа
+        System.out.println("\nМинимальное положительное число " + randomMassive[numberElementMinPositive]); //вывод мин. полож.
+        System.out.println("Максимальное отрицательное число " + randomMassive[numberElementMaxNegative]);  //вывод макс. отрицательного
 
         //замена значения в массиве
-        randomMassive[numberMax] = min;
-        randomMassive[numberMin] = max;
-        System.out.println("Теперь максимальное число такое:" + randomMassive[numberMax]); // вывод макс после изменения
-        System.out.println("Теперь минимальное число такое:" + randomMassive[numberMin]); // вывод мин после изменения
+        temp = randomMassive[numberElementMinPositive];
+        randomMassive[numberElementMinPositive] = randomMassive[numberElementMaxNegative];
+        randomMassive[numberElementMaxNegative] = temp;
+        System.out.println("Теперь минимальное положительное число такое:" + randomMassive[numberElementMinPositive]); // вывод мин.+ после изменения
+        System.out.println("Теперь максимальное отрицательное число такое:" + randomMassive[numberElementMaxNegative]); // вывод макс.- после изменения
 
     }
 }
