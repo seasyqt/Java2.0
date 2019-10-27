@@ -9,6 +9,12 @@ public class Calculator {
     public Calculator() {
     }
 
+    public Calculator(double firstNumber, double secondNumber, char operation) {
+        this.firstNumber = firstNumber;
+        this.secondNumber = secondNumber;
+        this.operation = operation;
+    }
+
     public double getFirstNumber() {
         return firstNumber;
     }
@@ -32,7 +38,7 @@ public class Calculator {
     public void setOperation(char operation) {
         this.operation = operation;
     }
-    void result() {
+    public void result() {
         if (operation == '+') {
             result = firstNumber + secondNumber;
         } else if (operation == '-') {
