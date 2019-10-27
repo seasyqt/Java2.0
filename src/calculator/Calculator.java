@@ -32,20 +32,23 @@ public class Calculator {
     public void setOperation(char operation) {
         this.operation = operation;
     }
-
     void result() {
-        if (operation =='+'){
+        if (operation == '+') {
             result = firstNumber + secondNumber;
-        }else if (operation =='-'){
+        } else if (operation == '-') {
             result = firstNumber - secondNumber;
-        }else if (operation == '*'){
+        } else if (operation == '*') {
             result = firstNumber * secondNumber;
-        }else if (operation =='/'){
+        } else if (operation == '/') {
             result = firstNumber / secondNumber;
         }
     }
-
-    public double getResult() {
+    public double getResult() throws ArithmeticException {
+        if (Double.isNaN(result)){
+            throw (new ArithmeticException("Nan"));
+        }else if (Double.isInfinite(result)){
+            throw (new ArithmeticException("Infinite"));
+        }
         return result;
     }
 }
